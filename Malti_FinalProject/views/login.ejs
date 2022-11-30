@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HTML Header-->
+<%- include('layouts/header') -%>
+
+    <body>
+        <!-- Navigation -->
+        <%- include('layouts/navbar') -%>
+
+            <!-- Page Header-->
+            <header class="masthead" id="loginBanner">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>Login</h1>
+                                <span class="subheading">Welcome to Login Page</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <form class="form" action="/loginUser" method="POST">
+
+                    <% if(userValid !=null && !userValid) { %>
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-danger">
+                                Please provide valid username or password. Don't have an account ? <a href="/signup">
+                                    Sign Up
+                                </a></li>
+                        </ul>
+                        <%} %>
+                            <div class="form_container">
+                                <label for="uname"><b>Username</b></label>
+                                <span class="required">*</span>
+                                <input type="text" placeholder="Enter Username" name="username" value="<%= username %>"
+                                    required>
+
+                                <label for="psw"><b>Password</b></label>
+                                <span class="required">*</span>
+                                <input type="password" placeholder="Enter Password" name="password"
+                                    value="<%= password %>" required>
+
+                                <div class="button_container">
+                                    <button type="submit">Login</button>
+                                </div>
+
+                                <p class="signupOption"> Don't have an account? <a href="/signup"> Sign Up </a> </p>
+                            </div>
+                </form>
+            </main>
+
+            <!--Footer-->
+            <%- include('layouts/footer') -%>
+    </body>
+
+</html>
