@@ -11657,16 +11657,8 @@ header.masthead .post-heading .meta a {
   background-image: url('/images/books-banner.jpg');
 }
 
-#gTestBanner {
-  background-image: url('/images/honda-brio.jpg');
-}
-
-#g2TestBanner {
-  background-image: url('/images/driving-lesson.jpg');
-}
-
 #loginBanner {
-  background-image: url('/images/stephan-mahlke.jpg');
+  background-image: url('/images/signup.jpg');
 }
 
 #signupBanner {
