@@ -16,6 +16,4 @@ dbConnection.connect(function (err) {
         console.log('connected successfully to DB.');
 });
 
-module.exports = {
-    dbConnection: mysql.createConnection(dbConfig)
-};
+module.exports = { dbConnection };

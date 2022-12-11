@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HTML Header-->
+<%- include('layouts/header') -%>
+
+    <body>
+        <!-- Navigation -->
+        <%- include('layouts/navbar') -%>
+
+            <!-- Page Header-->
+            <header class="masthead" id="loginBanner">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>Add Inventory</h1>
+                                <span class="subheading">Welcome to Add Page</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <form class="form" name="addBookOrderForm" id="addBookOrderForm" action="/addOrder" method="POST">
+
+                    <div class="form_container">
+
+                        <% if(insertionError !=null && insertionError.length> 0){%>
+                            <ul class="list-group">
+                                <% for(let i=0; i< insertionError.length; i ++){ %>
+                                    <li class="list-group-item list-group-item-danger">
+                                        <%= insertionError[i] %>
+                                    </li>
+                                    <% } %>
+                            </ul>
+                            <%} %>
+
+                                <label for="book"><b>Book</b></label>
+                                <span class="required">*</span>
+                                <select name="book" class="book" id="book" name="book" required>
+                                </select>
+
+                                <label for="quantity"><b>Quantity</b></label>
+                                <span class="required">*</span>
+                                <input type="number" placeholder="Enter quantity" id="quantity" name="quantity"
+                                    required>
+
+                                <div class="button_container">
+                                    <button type="submit">Add</button>
+                                </div>
+                    </div>
+                </form>
+
+                <form class="form" id="selectedBooks" name="selectedBooks" action="/confirmOrder" method="POST">
+                    <input type="hidden" id="bookOrderDetails" name="bookOrderDetails">
+
+                    <h1> Selected Books</h1>
+                    <table class="selectedBookTable">
+                        <thead>
+                            <tr>
+                                <th>S.N.</th>
+                                <th>Book</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="selectedBookDetails">
+                        </tbody>
+
+                        <tfoot id="selectedBookDetailsFooter">
+                        </tfoot>
+                    </table>
+
+                    <div class="button_container">
+                        <button type="submit">Confirm</button>
+                    </div>
+                </form>
+            </main>
+
+            <!--Footer-->
+            <%- include('layouts/footer') -%>
+                <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+                    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+                <script src="js/Book.js"></script>
+                <script src="js/addInventory.js"></script>
+    </body>
+
+</html>

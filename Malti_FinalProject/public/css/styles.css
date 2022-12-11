@@ -11791,3 +11791,7 @@ legend {
 .main_container {
   margin-bottom: 40px;
 }
+
+#selectedBooks{
+  display: none;
+}
