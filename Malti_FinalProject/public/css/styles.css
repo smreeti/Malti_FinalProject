@@ -11753,6 +11753,7 @@ legend {
   margin: auto;
   text-align: center;
   width: 150px;
+  margin-top: 20px;
 }
 
 .signupOption {
@@ -11792,6 +11793,30 @@ legend {
   margin-bottom: 40px;
 }
 
-#selectedBooks{
+#selectedBooks {
   display: none;
+  margin-top: 40px;
 }
+
+#selectedBooks h1 {
+  text-align: center;
+  margin: 20px;
+}
+
+.selectedBookTable {
+  width: 90%;
+  border-spacing: 0;
+  margin: auto;
+}
+
+.rowIndex{
+  width: 60px;
+}
+
+th,
+td {
+  text-align: center;
+  border: 1px solid black;
+}
+
+

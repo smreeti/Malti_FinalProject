@@ -7,7 +7,10 @@ const {
     loginEmployee,
     addInventory,
     addOrder,
-    confirmOrder
+    confirmOrder,
+    manageInventory,
+    manageOrderItem,
+    verifyOrder
 } = require('../controllers/controllers.js');
 
 //API end points and their corresponding ejs pages to navigate
@@ -20,5 +23,9 @@ router.post('/loginEmployee', loginEmployee);
 router.get('/addInventory', addInventory);
 router.post('/addOrder', addOrder);
 router.post('/confirmOrder', confirmOrder);
+
+router.get('/manageInventory', manageInventory);
+router.get('/manageOrderItem/:bookOrderID', manageOrderItem);
+router.post('/verifyOrder', verifyOrder);
 
 module.exports = router;

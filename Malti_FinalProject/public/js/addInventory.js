@@ -15,7 +15,7 @@ $(document).ready(() => {
     let selectedBookArray = []; //for selected book lists and used during confirmation
     let totalItems = 0;
     let selectedBookDetails;
-    $("#addBookOrderForm").submit(() => {
+    $("#addBookOrder").click(() => {
         let selectedBook = $('#book').val();
         let selectedBookId = $('#book :selected').attr("id");
         let selectedQuantity = parseInt($('#quantity').val());
@@ -24,11 +24,11 @@ $(document).ready(() => {
 
         //show table for selected books
         $('#selectedBooks').css("display", "block");
-        $('#selectedBookDetailsFooter').css("display", "block");
+        $('#selectedBookDetailsFooter').css("display", "table-footer-group");
 
         $('#selectedBookDetails').append(
             `<tr>
-                <td>${rowCount}</td>
+                <td class ="rowIndex">${rowCount}</td>
                 <td>${selectedBook}</td>
                 <td>${selectedQuantity}</td>
             </tr>`);
@@ -41,7 +41,11 @@ $(document).ready(() => {
 
         $('#selectedBookDetailsFooter').empty();
         $('#selectedBookDetailsFooter').append(
-            `<p> Total Items : ${totalItems} </p>`
+            `<tr>
+                <td colspan="3">
+                  <b> Total Items : ${totalItems}  <b>
+                </td>
+            </tr>`
         )
 
         $('#bookOrderDetails').val(JSON.stringify(selectedBookDetails));

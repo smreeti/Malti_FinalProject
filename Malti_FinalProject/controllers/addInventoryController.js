@@ -1,5 +1,4 @@
 let { dbConnection } = require('../database/dbConfig.js');
-const mysql = require('mysql');
 
 const addInventory = (req, res) => {
     res.render('addInventory', { insertionError: null });
@@ -22,8 +21,9 @@ const confirmOrder = (req, res) => {
             let lastInsertID = result.insertId;
 
             selectedBookArray.forEach(selectedBook => {
-                let insertOrderItemQuery = `INSERT INTO orderItem(quantity, bookOrderID, bookID, orderStatusID) VALUES 
-                    ( ${selectedBook.quantity}, ${lastInsertID},  ${selectedBook.bookId}, 1)`;
+                let randomNumber = Math.floor(Math.random() * 90000) + 10000;
+                let insertOrderItemQuery = `INSERT INTO orderItem(orderNumber, quantity, bookOrderID, bookID, orderStatusID) VALUES 
+                    (${randomNumber}, ${selectedBook.quantity}, ${lastInsertID},  ${selectedBook.bookId}, 1)`;
 
                 dbConnection.query(insertOrderItemQuery, async (error, result) => {
                     if (error)
