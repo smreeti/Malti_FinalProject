@@ -23,10 +23,11 @@
             </header>
 
             <main>
-                <% if(bookOrderDetails.orderItems.length !=null && bookOrderDetails.orderItems.length>0) { %>
+                <% if(bookOrderDetails.orderItems !=null && bookOrderDetails.orderItems.length>0) { %>
                     <form class="form" name="addBookOrderForm" id="addBookOrderForm" action="/verifyOrder"
                         method="POST">
-                        <input type="hidden" id="bookOrderDetails" name="bookOrderDetails" value=<%=bookOrderDetails.bookOrder.orderNumber%>>
+                        <input type="hidden" id="bookOrderDetails" name="bookOrderDetails"
+                            value="<%= JSON.stringify(bookOrderDetails) %>">
 
                         <h1> Book Order Details</h1>
                         <div>
@@ -50,6 +51,7 @@
 
                             <tbody>
                                 <% for(let i=0; i< bookOrderDetails.orderItems.length; i ++){ %>
+
                                     <tr>
                                         <td>
                                             <%= i+1 %>
@@ -61,18 +63,44 @@
                                             <%= bookOrderDetails.orderItems[i].quantity %>
                                         </td>
                                         <td>
-                                            <input type="radio" id="received" class="orderStatus"
-                                                name="orderStatus/<%= i %>" value="received">
-                                            <label for="received">Received</label>
+                                            <% for(let j=0; j< orderStatus.length; j ++){ %>
+                                                <input type="radio" id=<%=orderStatus[j].code%>
+                                                class="orderStatus"name="orderStatus/<%=i%>"
 
-                                            <input type="radio" id="cancelled" class="orderStatus"
-                                                name="orderStatus/<%= i %>" value="cancelled">
-                                            <label for="cancelled">Cancelled</label>
+                                                    <% if(orderStatus[j].orderStatusID==bookOrderDetails.orderItems[i].orderStatusID){%>
+                                                            checked ="checked"
+                                                        <%} %>
+                                                                state= "<%=bookOrderDetails.orderItems[i].orderItemID%>|<%=orderStatus[j].orderStatusID%>|<%=orderStatus[j].code%>">
+                                                                            <label for="received">
+                                                                                <%= orderStatus[j].code%>
+                                                                            </label>
+                                                                            <% } %>
                                         </td>
                                     </tr>
                                     <% } %>
                             </tbody>
                         </table>
+
+                        <div>
+
+                            <label for="bookOrderStatus"><b>Book Order Status</b></label>
+                            <span class="required">*</span>
+                            <select name="bookOrderStatus">
+
+                                <% for(let k=0; k< orderStatus.length; k ++){ %>
+                                    <option value="<%= orderStatus[k].orderStatusID %>"
+                                        
+                                        <% if(orderStatus[k].orderStatusID==bookOrderDetails.bookOrder.orderStatusID){%>
+                                            selected
+                                        <%} %>
+                                        >
+                                        <%= orderStatus[k].code %>
+                                    </option>
+
+                                    <% } %>
+                            </select>
+                        </div>
+
                         <div class="button_container">
                             <button type="submit">Confirm Order</button>
                         </div>

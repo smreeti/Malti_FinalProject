@@ -32,7 +32,8 @@
                                 <th>Order Number</th>
                                 <th>Quantity</th>
                                 <th>Ordered Date</th>
-                                <th></th>
+                                <th>Verify</th>
+                                
                             </tr>
                         </thead>
 
@@ -51,6 +52,7 @@
                                     <td>
                                         <%= result[i].orderedDate.toISOString().split('T')[0] %>
                                     </td>
+                                    <td> <a href="/manageOrderItem/<%= result[i].bookOrderID %>"> See Details</a></td>
                                 </tr>
                                 <% } %>
 
