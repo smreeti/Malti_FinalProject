@@ -14,7 +14,7 @@ const loginEmployee = (req, res) => {
         if (employee && employee.length > 0) {
             let same = await bcrypt.compare(password, employee[0]['password']);
             if (same) { //if passwords match
-                req.session.loggedInId = employee.employeeID;
+                req.session.loggedInId = employee[0].employeeID;
                 req.session.isLoggedIn = true;
                 return res.redirect('/');
             }
