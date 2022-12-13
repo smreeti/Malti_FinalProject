@@ -27,7 +27,7 @@ const manageOrderItem = (req, res) => {
             if (orderStatus) {
                 dbConnection.query(bookOrderQuery, async (error, bookOrder) => {
 
-                    let bookOrderItemQuery = `SELECT oi.orderItemID, oi.quantity, b.name, os.orderStatusID, os.code 
+                    let bookOrderItemQuery = `SELECT oi.orderItemID, oi.quantity, b.bookID, b.name, os.orderStatusID, os.code 
                                 FROM orderitem oi
                                 JOIN book b ON b.bookID = oi.bookID
                                 JOIN orderstatus os ON os.orderStatusID = oi.orderStatusID
@@ -64,6 +64,32 @@ const verifyOrder = (req, res) => {
                                     WHERE orderItemID =${orderItem.orderItemID}`;
         try {
             dbConnection.query(updateOrderItemQuery, async (error, orderItems) => {
+                let selectBookStockQuery = `SELECT * FROM bookStock WHERE bookID = ${orderItem.bookID}`;
+
+                //if the book already exists, simply update the quantity count else insert new record of Book Stock with corresponding book and quantity.
+                dbConnection.query(selectBookStockQuery, async (error, bookStocks) => {
+
+                    console.log("cdcs", bookStocks, bookStocks.length)
+                    console.log(selectBookStockQuery)
+                    if (bookStocks && bookStocks.length > 0) {
+                        let updateBookStockQuery = `UPDATE bookStock SET quantity = quantity + ${orderItem.quantity} WHERE bookID = ${orderItem.bookID}`;
+
+                        console.log(updateBookStockQuery)
+
+                        dbConnection.query(updateBookStockQuery, async (error, bookStocks) => {
+                            console.log(bookStocks, error);
+                        })
+                    } else {
+                        let insertBookStockQuery = `INSERT INTO bookStock(quantity, bookID) VALUES 
+                                                    (${orderItem.quantity}, ${orderItem.bookID} )`;
+
+                        console.log(insertBookStockQuery)
+
+                        dbConnection.query(insertBookStockQuery, async (error, bookStocks) => {
+                            console.log(bookStocks, error);
+                        })
+                    }
+                })
             })
         } catch (e) {
             console.log(e);
@@ -71,11 +97,11 @@ const verifyOrder = (req, res) => {
     })
 
     //update order status of BookOrder
-    let updateBookOrderItemQuery = `UPDATE bookOrder SET orderStatusID = ${bookOrderStatus} 
+    let updateBookOrderQuery = `UPDATE bookOrder SET orderStatusID = ${bookOrderStatus} 
                                     WHERE bookOrderID =${bookOrder.bookOrderID}`;
 
     try {
-        dbConnection.query(updateBookOrderItemQuery, async (error, response) => {
+        dbConnection.query(updateBookOrderQuery, async (error, response) => {
             console.log(error, response);
         })
     } catch (e) {
