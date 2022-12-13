@@ -24,52 +24,39 @@
 
             <main>
                 <form class="form" action="/signUpUser" method="POST">
-                    <% if(errors !=null && errors.length> 0){%>
-                        <ul class="list-group">
-                            <% for(let i=0; i< errors.length; i ++){ %>
-                                <li class="list-group-item list-group-item-danger">
-                                    <%= errors[i] %>
-                                </li>
-                                <% } %>
-                        </ul>
-                        <%} %>
+                    <div class="form_container">
+                        <label for="firstName"><b>First Name</b></label>
+                        <span class="required">*</span>
+                        <input type="text" placeholder="Enter First Name" name="firstName" required>
 
-                            <div class="form_container">
-                                <label for="username"><b>Username</b></label>
-                                <span class="required">*</span>
-                                <input type="text" placeholder="Enter Username" name="username" value="<%= username %>"
-                                    required>
+                        <label for="lastName"><b>Last Name</b></label>
+                        <span class="required">*</span>
+                        <input type="text" placeholder="Enter Last Name" name="lastName" required>
 
-                                <label for="password"><b>Password</b></label>
-                                <span class="required">*</span>
-                                <input type="password" placeholder="Enter Password" name="password"
-                                    value="<%= password %>" required>
+                        <label for="lastName"><b>Email</b></label>
+                        <span class="required">*</span>
+                        <input type="text" placeholder="Enter Email" name="email" required>
 
-                                <label for="repsw"><b>Confirm Password</b></label>
-                                <span class="required">*</span>
-                                <input type="password" placeholder="Enter Password" name="repassword" required>
+                        <label for="address"><b>Address</b></label>
+                        <span class="required">*</span>
+                        <input type="text" placeholder="Enter Address" name="address" required>
 
-                                <% if(passwordError) { %>
-                                    <div>
-                                        <span class="main_error">Password do not match </span>
-                                    </div>
-                                    <% } %>
+                        <label for="phonenumber"><b>Phone Number</b></label>
+                        <span class="required">*</span>
+                        <input type="number" placeholder="Enter Phone Number" name="phonenumber" required>
 
-                                        <label for="userType"><b>User Type</b></label>
-                                        <span class="required">*</span>
-                                        <select name="userType">
-                                            <option value="Driver"> Driver
-                                            </option>
-                                            <option value="Examiner"> Examiner
-                                            </option>
-                                            <option value="Admin"> Admin
-                                            </option>
-                                        </select>
+                        <label for="username"><b>Username</b></label>
+                        <span class="required">*</span>
+                        <input type="text" placeholder="Enter Username" name="username" required>
 
-                                        <div class="button_container">
-                                            <button type="submit">Sign up</button>
-                                        </div>
-                            </div>
+                        <label for="password"><b>Password</b></label>
+                        <span class="required">*</span>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+
+                        <div class="button_container">
+                            <button type="submit">Sign up</button>
+                        </div>
+                    </div>
                 </form>
             </main>
 

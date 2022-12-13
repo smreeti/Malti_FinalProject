@@ -10,22 +10,29 @@ const {
     confirmOrder,
     manageInventory,
     manageOrderItem,
-    verifyOrder
+    verifyOrder,
+    signUp,
+    signUpUser,
+    logout
 } = require('../controllers/controllers.js');
+const redirectIfAuthenticatedMiddleware = require('../middlewares/redirectIfAuthenticatedMiddleware.js');
 
 //API end points and their corresponding ejs pages to navigate
 router.get('/', dashboard);
 router.get('/login', login);
 router.post('/loginEmployee', loginEmployee);
 
-// router.get('/logout', logout);
+router.get('/signUp', signUp);
+router.post('/signUpUser', signUpUser);
 
-router.get('/addInventory', addInventory);
-router.post('/addOrder', addOrder);
-router.post('/confirmOrder', confirmOrder);
+router.get('/logout', logout);
 
-router.get('/manageInventory', manageInventory);
-router.get('/manageOrderItem/:bookOrderID', manageOrderItem);
-router.post('/verifyOrder', verifyOrder);
+router.get('/addInventory', redirectIfAuthenticatedMiddleware, addInventory);
+router.post('/addOrder', redirectIfAuthenticatedMiddleware, addOrder);
+router.post('/confirmOrder', redirectIfAuthenticatedMiddleware, confirmOrder);
+
+router.get('/manageInventory', redirectIfAuthenticatedMiddleware, manageInventory);
+router.get('/manageOrderItem/:bookOrderID', redirectIfAuthenticatedMiddleware, manageOrderItem);
+router.post('/verifyOrder', redirectIfAuthenticatedMiddleware, verifyOrder);
 
 module.exports = router;
