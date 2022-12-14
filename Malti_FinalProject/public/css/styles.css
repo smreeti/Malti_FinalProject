@@ -11670,6 +11670,23 @@ header.masthead .post-heading .meta a {
 
 }
 
+#addInventory {
+  background-image: url('/images/addBook.jpg');
+}
+
+#manageBookBanner {
+  background-image: url('/images/manageBook.jpg');
+}
+
+.masthead {
+  height: 95vh;
+
+}
+
+.title {
+  text-align: center;
+}
+
 /*Login page CSS */
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -11807,9 +11824,11 @@ legend {
   width: 90%;
   border-spacing: 0;
   margin: auto;
+  margin-bottom: 30px;
+  background-color: #e3e3e3;
 }
 
-.rowIndex{
+.rowIndex {
   width: 60px;
 }
 
@@ -11819,4 +11838,36 @@ td {
   border: 1px solid black;
 }
 
+#manageBookOrderForm {
+  width: 80%;
+}
 
+.seeDetails a {
+  color: blue;
+}
+
+.bookOrder {
+  margin: 30px;
+}
+
+.orderStatus {
+  width: auto;
+}
+
+.orderStatusLabel {
+  padding-right: 20px;
+}
+
+.bookOrderStatusSelect {
+  width: 15%;
+}
+
+.orderSuccess {
+  background-color: #80ff80;
+  text-align: center;
+}
+
+.orderSuccess a {
+  color: blue;
+  text-decoration: underline;
+}

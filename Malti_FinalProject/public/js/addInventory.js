@@ -11,14 +11,13 @@ $(document).ready(() => {
 
     fetchBook();
 
-    let rowCount = 0; //for table index
     let selectedBookArray = []; //for selected book lists and used during confirmation
     let totalItems = 0;
     let selectedBookDetails;
     $("#addBookOrder").click(() => {
+        let selectedBook = $('#book').val();
         let selectedBookId = $('#book :selected').attr("id");
         let selectedQuantity = parseInt($('#quantity').val());
-        rowCount++;
         totalItems += (selectedQuantity);
 
         //show table for selected books
@@ -38,7 +37,8 @@ $(document).ready(() => {
         } else {
             selectedBookArray.push({
                 bookId: selectedBookId,
-                quantity: selectedQuantity
+                quantity: selectedQuantity,
+                book: selectedBook
             })
         }
 
@@ -46,7 +46,7 @@ $(document).ready(() => {
             $('#selectedBookDetails').append(
                 `<tr>
                             <td class ="rowIndex">${index + 1}</td>
-                            <td>${selectedBooks.bookId}</td>
+                            <td>${selectedBooks.book}</td>
                             <td>${selectedBooks.quantity}</td>
                         </tr>`);
 

@@ -1,9 +1,9 @@
 let { dbConnection } = require('../database/dbConfig.js');
 
 const manageInventory = (req, res) => {
-    let bookOrderQuery = `SELECT bookOrderID, orderNumber, quantity, orderedDate FROM bookorder b
-                         JOIN orderstatus os ON b.orderStatusID = os.orderStatusID
-                         WHERE os.code = 'PENDING'`;
+    let bookOrderQuery = `SELECT bookOrderID, orderNumber, quantity, orderedDate, os.code as orderStatus
+                         FROM bookorder b
+                         JOIN orderstatus os ON b.orderStatusID = os.orderStatusID`;
 
     try {
         dbConnection.query(bookOrderQuery, async (error, result) => {
@@ -16,9 +16,11 @@ const manageInventory = (req, res) => {
 
 const manageOrderItem = (req, res) => {
     let bookOrderID = req.params.bookOrderID;
-    let bookOrderQuery = `SELECT bookOrderID, orderNumber, quantity, orderedDate, b.orderStatusID 
+    let bookOrderQuery = `SELECT bookOrderID, orderNumber, quantity, orderedDate, b.orderStatusID,
+                        CONCAT(firstName, ' ', lastName)as employee 
                         FROM bookorder b
                         JOIN orderstatus os ON b.orderStatusID = os.orderStatusID
+                        JOIN employee e ON e.employeeID = b.employeeID
                         WHERE b.bookOrderID = ${bookOrderID}`;
 
     let orderStatusQuery = `SELECT orderStatusID, code FROM orderStatus`;
@@ -68,13 +70,8 @@ const verifyOrder = (req, res) => {
 
                 //if the book already exists, simply update the quantity count else insert new record of Book Stock with corresponding book and quantity.
                 dbConnection.query(selectBookStockQuery, async (error, bookStocks) => {
-
-                    console.log("cdcs", bookStocks, bookStocks.length)
-                    console.log(selectBookStockQuery)
                     if (bookStocks && bookStocks.length > 0) {
                         let updateBookStockQuery = `UPDATE bookStock SET quantity = quantity + ${orderItem.quantity} WHERE bookID = ${orderItem.bookID}`;
-
-                        console.log(updateBookStockQuery)
 
                         dbConnection.query(updateBookStockQuery, async (error, bookStocks) => {
                             console.log(bookStocks, error);
@@ -82,8 +79,6 @@ const verifyOrder = (req, res) => {
                     } else {
                         let insertBookStockQuery = `INSERT INTO bookStock(quantity, bookID) VALUES 
                                                     (${orderItem.quantity}, ${orderItem.bookID} )`;
-
-                        console.log(insertBookStockQuery)
 
                         dbConnection.query(insertBookStockQuery, async (error, bookStocks) => {
                             console.log(bookStocks, error);

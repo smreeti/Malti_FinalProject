@@ -9,13 +9,13 @@
         <%- include('layouts/navbar') -%>
 
             <!-- Page Header-->
-            <header class="masthead" id="loginBanner">
+            <header class="masthead" id="manageBookBanner">
                 <div class="container position-relative px-4 px-lg-5">
                     <div class="row gx-4 gx-lg-5 justify-content-center">
                         <div class="col-md-10 col-lg-8 col-xl-7">
                             <div class="site-heading">
-                                <h1>Manage Inventory</h1>
-                                <span class="subheading">Welcome to Manage Page</span>
+                                <!-- <h1>dcs</h1>
+                                <span class="subheading"></span> -->
                             </div>
                         </div>
                     </div>
@@ -25,6 +25,7 @@
             <main>
 
                 <% if(result !=null && result.length>0) { %>
+                    <h1 class="title">Available Book Orders</h1>
                     <table class="selectedBookTable">
                         <thead>
                             <tr>
@@ -32,7 +33,8 @@
                                 <th>Order Number</th>
                                 <th>Quantity</th>
                                 <th>Ordered Date</th>
-                                <th>Verify</th>
+                                <th>Order Status</th>
+                                <th></th>
                                 
                             </tr>
                         </thead>
@@ -52,7 +54,10 @@
                                     <td>
                                         <%= result[i].orderedDate.toISOString().split('T')[0] %>
                                     </td>
-                                    <td> <a href="/manageOrderItem/<%= result[i].bookOrderID %>"> See Details</a></td>
+                                    <td>
+                                        <%= result[i].orderStatus %>
+                                    </td>
+                                    <td class="seeDetails"> <a href="/manageOrderItem/<%= result[i].bookOrderID %>"> View Details</a></td>
                                 </tr>
                                 <% } %>
 
