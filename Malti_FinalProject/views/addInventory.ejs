@@ -22,7 +22,7 @@
 
             <main>
                 <form class="form" name="addBookOrderForm" id="addBookOrderForm" action="/addOrder" method="POST">
-
+                    <input type="hidden" id="data" name="data" value="<%=JSON.stringify(data)%>">
                     <div class="form_container">
 
                         <% if(insertionError !=null && insertionError.length> 0){%>
@@ -35,19 +35,38 @@
                             </ul>
                             <%} %>
 
-                                <label for="book"><b>Book</b></label>
-                                <span class="required">*</span>
-                                <select name="book" class="book" id="book" name="book" required>
-                                </select>
+                                <% if(data !=null){%>
+                                    <label for="bookCategory"><b>Book Category</b></label>
+                                    <span class="required">*</span>
+                                    <select name="bookCategory" id="bookCategory" name="bookCategory" required>
+                                        <% for(let k=0; k< data.bookCategory.length; k++){ %>
+                                            <option value="<%= data.bookCategory[k].bookCategoryId %>"
+                                                id="<%= data.bookCategory[k].bookCategoryId %>">
+                                                <%= data.bookCategory[k].categoryName %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                    <% } %>
 
-                                <label for="quantity"><b>Quantity</b></label>
-                                <span class="required">*</span>
-                                <input type="number" placeholder="Enter quantity" id="quantity" name="quantity"
-                                    required>
+                                        <label for="book"><b>Book</b></label>
+                                        <span class="required">*</span>
+                                        <select name="book" id="book" name="book" required>
+                                            <% for(let l=0; l< data.books.length; l++){ %>
+                                                <option value="<%= data.books[l].bookID%>"
+                                                    id="<%= data.books[l].bookID %>">
+                                                    <%= data.books[l].name %>
+                                                </option>
+                                                <% } %>
+                                        </select>
 
-                                <div class="button_container">
-                                    <button type="button" id ="addBookOrder">Add</button>
-                                </div>
+                                        <label for="quantity"><b>Quantity</b></label>
+                                        <span class="required">*</span>
+                                        <input type="number" placeholder="Enter quantity" id="quantity" name="quantity"
+                                            required>
+
+                                        <div class="button_container">
+                                            <button type="button" id="addBookOrder">Add</button>
+                                        </div>
                     </div>
                 </form>
 

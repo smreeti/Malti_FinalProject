@@ -1,7 +1,20 @@
 let { dbConnection } = require('../database/dbConfig.js');
 
 const addInventory = (req, res) => {
-    res.render('addInventory', { insertionError: null });
+
+    let bookCategoryQuery = "SELECT * FROM bookCategory";
+    let bookQuery = "SELECT * FROM book";
+    try {
+        dbConnection.query(bookCategoryQuery, (error, bookCategory) => {
+            console.log(error, bookCategory);
+            dbConnection.query(bookQuery, (error, books) => {
+                res.render('addInventory', { insertionError: null, data: { bookCategory, books } });
+            })
+        })
+    } catch (e) {
+        console.log(e);
+    }
+
 }
 
 const addOrder = (req, res) => { };
@@ -26,19 +39,21 @@ const confirmOrder = (req, res) => {
                     ${selectedBook.quantity}, ${lastInsertID},  ${selectedBook.bookId}, 1)`;
 
                 dbConnection.query(insertOrderItemQuery, async (error, result) => {
-                    if (error)
+                    if (error) {
                         console.log(error);
+                        const insertionError = Object.keys(error.errors).map(key => {
+                            return error.errors[key].message
+                        });
+                        req.flash('insertionError', insertionError);
+                        res.render('addInventory', { insertionError: req.flash('insertionError'), data: null });
+                    }
 
                     res.render('orderConfirmation', { bookOrderID: `${lastInsertID}` });
                 });
             })
         });
     } catch (error) {
-        const insertionError = Object.keys(error.errors).map(key => {
-            return error.errors[key].message
-        });
-        req.flash('insertionError', insertionError);
-        res.render('addInventory', { insertionError: req.flash('insertionError') });
+        console.log(error);
     }
 }
 

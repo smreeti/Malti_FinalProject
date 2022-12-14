@@ -1,15 +1,26 @@
 $(document).ready(() => {
     const fetchBook = () => {
-        books.forEach(book => {
+        let data = JSON.parse($('#data').val());
+        let selectedBookCategory = $('#bookCategory :selected').attr("id");
+        let { books } = data;
+        $('#book').empty();
+
+        let filteredBooks = books.filter(book =>  (book.bookCategoryID == selectedBookCategory));
+
+        filteredBooks.forEach(book => {
             $('#book').append($('<option>', {
                 value: book.name,
                 text: book.name,
-                id: book.bookId
+                id: book.bookID
             }));
         })
     }
 
     fetchBook();
+
+    $('#bookCategory').change(() => {
+        fetchBook();
+    })
 
     let selectedBookArray = []; //for selected book lists and used during confirmation
     let totalItems = 0;
