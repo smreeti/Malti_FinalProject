@@ -13,7 +13,8 @@ const {
     verifyOrder,
     signUp,
     signUpUser,
-    logout
+    logout,
+    printInvoice
 } = require('../controllers/controllers.js');
 const redirectIfAuthenticatedMiddleware = require('../middlewares/redirectIfAuthenticatedMiddleware.js');
 
@@ -35,4 +36,5 @@ router.get('/manageInventory', redirectIfAuthenticatedMiddleware, manageInventor
 router.get('/manageOrderItem/:bookOrderID', redirectIfAuthenticatedMiddleware, manageOrderItem);
 router.post('/verifyOrder', redirectIfAuthenticatedMiddleware, verifyOrder);
 
+router.get('/printInvoice/:bookOrderID', printInvoice);
 module.exports = router;

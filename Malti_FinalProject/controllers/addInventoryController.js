@@ -15,7 +15,7 @@ const confirmOrder = (req, res) => {
 
     let randomNumber = Math.floor(Math.random() * 90000) + 10000;
     let insertBookOrderQuery = `INSERT INTO bookOrder(orderNumber, quantity, orderedDate, employeeID, orderStatusID) VALUES 
-        ( ${randomNumber},${totalItems}, NOW(), 1, 1)`;
+        ( ${randomNumber},${totalItems}, NOW(), ${loggedInEmployeeId}, 1)`;
 
     try {
         dbConnection.query(insertBookOrderQuery, async (error, result) => {
@@ -29,7 +29,7 @@ const confirmOrder = (req, res) => {
                     if (error)
                         console.log(error);
 
-                    res.render('addInventory', { insertionError: null });
+                    res.render('orderConfirmation', { bookOrderID: `${lastInsertID}` });
                 });
             })
         });

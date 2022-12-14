@@ -16,7 +16,6 @@ $(document).ready(() => {
     let totalItems = 0;
     let selectedBookDetails;
     $("#addBookOrder").click(() => {
-        let selectedBook = $('#book').val();
         let selectedBookId = $('#book :selected').attr("id");
         let selectedQuantity = parseInt($('#quantity').val());
         rowCount++;
