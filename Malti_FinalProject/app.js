@@ -36,22 +36,6 @@ app.use(flash());
 app.use(route);
 app.use((req, res) => res.render('notfound')); //creating a 404 page for non-existing route
 
-// var con = mysql.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: ""
-// });
-
-// con.connect(function (err) {
-//     if (err) throw err;
-//     console.log("Connected!");
-// });
-
-//  dbConnection.connect(function (err) {
-//     if (err) throw err;
-//     console.log("Connected!");
-// });
-
 app.listen(5600, () => {
     console.log("App is listening to port 5600");
 })
