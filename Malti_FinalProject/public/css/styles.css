@@ -11933,3 +11933,30 @@ td {
 .reports{
   text-align: center;
 }
+
+.no_orders{
+  text-align: center;
+  background-color: red;
+  height: 40px;
+}
+
+.no_orders{
+  font-size: 20px;
+}
+
+.fonts_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.fonts_container button{
+  width: 45px;
+}
+
+.font{
+  margin-bottom: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
