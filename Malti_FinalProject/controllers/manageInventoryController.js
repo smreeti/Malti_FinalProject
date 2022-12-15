@@ -38,7 +38,6 @@ const manageOrderItem = (req, res) => {
                     if (bookOrder) {
                         dbConnection.query(bookOrderItemQuery, async (error, orderItems) => {
                             let bookOrderDetails = { bookOrder: bookOrder[0], orderItems };
-                            console.log(bookOrderDetails)
                             res.render('manageOrderDetails', { bookOrderDetails, orderStatus });
                         })
                     } else {
