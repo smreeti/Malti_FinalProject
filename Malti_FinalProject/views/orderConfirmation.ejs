@@ -22,9 +22,11 @@
             </header>
 
             <main class="orderSuccess">
-                <p><b>Congratulations! You have successfully placed book order</b></p>
-                <b> <a href="/printInvoice/<%= bookOrderID %>">Print Invoice</a></b><br>
-                </b> <a href="/addInventory">Keep Ordering</a></b>
+                <p><b>Congratulations! You have successfully placed book order.</b></p>
+                <div class="orderSuccess-actions">
+                    <a href="/printInvoice/<%= bookOrderID %>">Print Invoice</a>
+                    <a href="/addInventory">Keep Ordering</a>
+                </div>
             </main>
 
             <!--Footer-->

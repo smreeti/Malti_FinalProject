@@ -22,26 +22,46 @@
                 </div>
             </header>
             <main>
-                <% if(data.bookInfo !=null && data.bookInfo.length > 0) { %>
-                    <h1 class="title">Book List</h1>
+                <% if(data.stock !=null && data.stock.length > 0) { %>
+                    <h1 class="title">Avaiable Book Stock</h1>
                     <div class="books">
-                        <% for(let i=0; i< data.bookInfo.length; i ++){ %>
+                        <% for(let i=0; i< data.stock.length; i ++){ %>
                             <div class="book-item">
-                                <img src="/images/books.jpg" alt="Avatar" style="width:100%">
+                                <img src="/images/stock.jpg" alt="Avatar" style="width:100%;height: 200px;">
                                 <div class="info">
-                                    <h4><b><%= data.bookInfo[i].bookName %></b></h4> 
-                                    <p class="book-item-author"><%= data.bookInfo[i].authorFName %>
-                                        <%= data.bookInfo[i].authorLName %></p> 
+                                    <h4><b><%= data.stock[i].bookName %></b></h4> 
+                                    <p class="book-item-author"><%= data.stock[i].authorName %>
                                     <div class="book-item-footer">
-                                        <span class="book-item-category"><%= data.bookInfo[i].categoryName %></span>
-                                        <span>C$ <%= data.bookInfo[i].price %></span>
+                                        <span class="book-item-category"><%= data.stock[i].categoryName %></span>
+                                        <span class="book-item-quantity">Qty: <%= data.stock[i].quantity %></span>
                                     </div>
                                 </div>
                             </div>
                         <%} %>
                     </div>
                 <%}else{ %>
-                    <p> No book orders yet!</p>
+                    <p class="text-center"> No books in stock yet!</p>
+                <%} %>
+
+                <% if(data.bookInfo !=null && data.bookInfo.length > 0) { %>
+                    <h1 class="title">Book List</h1>
+                    <div class="books">
+                        <% for(let i=0; i< data.bookInfo.length; i ++){ %>
+                            <div class="book-item">
+                                <img src="/images/books.jpg" alt="Avatar" style="width:100%;height: 200px;">
+                                <div class="info">
+                                    <h4><b><%= data.bookInfo[i].bookName %></b></h4> 
+                                    <p class="book-item-author"><%= data.bookInfo[i].authorName %>
+                                    <div class="book-item-footer">
+                                        <span class="book-item-category"><%= data.bookInfo[i].categoryName %></span>
+                                        <span  class="book-item-price">$ <%= data.bookInfo[i].price %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        <%} %>
+                    </div>
+                <%}else{ %>
+                    <p class="text-center"> No book yet!</p>
                 <%} %>
                 <p class="reports"><a href="/fetchBookList">Download Book List</a></p>
             </main>

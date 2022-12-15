@@ -93,10 +93,11 @@ const fetchBookList = (req, res) => {
   pdf.Cell(180, 10, "Book List Report", 0, 0, "C");
   pdf.Ln(10);
 
-  let bookListQuery = `SELECT b.name as bookName, a.firstName as authorFName, a.lastName as authorLName, bc.categoryName, b.price, b.ISBN 
-                        FROM book AS b 
-                        JOIN author AS a ON b.authorId = a.authorId 
-                        JOIN bookcategory AS bc ON b.bookCategoryID = bc.bookCategoryId`;
+  let bookListQuery = `SELECT b.name as bookName, CONCAT(a.firstName, ' ', a.lastName) as authorName, bc.categoryName, b.price, b.ISBN FROM book AS b
+                        JOIN author AS a
+                            ON b.authorId = a.authorId
+                        JOIN bookcategory AS bc
+                            ON b.bookCategoryID = bc.bookCategoryId`;
 
   try {
     dbConnection.query(bookListQuery, (error, bookListResult) => {
@@ -114,7 +115,7 @@ const fetchBookList = (req, res) => {
           pdf.Cell(
             40,
             10,
-            bookInfo.authorFName + " " + bookInfo.authorLName,
+            bookInfo.authorName,
             1,
             0,
             "C"

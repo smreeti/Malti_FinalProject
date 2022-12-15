@@ -1,16 +1,26 @@
 let { dbConnection } = require("../database/dbConfig.js");
 
 const dashboard = (req, res) => {
-  let booksQuery = `SELECT b.name as bookName, a.firstName as authorFName, a.lastName as authorLName, bc.categoryName, b.price, b.ISBN 
-                    FROM book AS b 
-                    JOIN author AS a ON b.authorId = a.authorId 
-                    JOIN bookcategory AS bc ON b.bookCategoryID = bc.bookCategoryId`;
+    let booksQuery = `SELECT b.name as bookName, CONCAT(a.firstName, ' ', a.lastName) as authorName, bc.categoryName, b.price, b.ISBN FROM book AS b
+                        JOIN author AS a
+                            ON b.authorId = a.authorId
+                        JOIN bookcategory AS bc
+                            ON b.bookCategoryID = bc.bookCategoryId`;
+
+    let stockQuery = `SELECT b.name as bookName, CONCAT(a.firstName, ' ', a.lastName) as authorName, bc.categoryName, b.price, b.ISBN, s.quantity FROM book AS b
+                        JOIN bookstock AS s
+                            ON b.bookID = s.bookID
+                        JOIN author AS a
+                            ON b.authorId = a.authorId
+                        JOIN bookcategory AS bc
+                            ON b.bookCategoryID = bc.bookCategoryId`;
   try {
     dbConnection.query(booksQuery, (error, bookInfo) => {
-      console.log("Get books sucessfully!!!");
-      console.log(error, bookInfo);
-      res.render("dashboard", {
-        data: { insertionError: null, bookInfo },
+      dbConnection.query(stockQuery, (error, stock) => {
+        console.log("Get books/stock sucessfully!!!");
+        res.render("dashboard", {
+          data: { insertionError: null, bookInfo, stock },
+        });
       });
     });
   } catch (e) {
