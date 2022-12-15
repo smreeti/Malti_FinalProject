@@ -44,6 +44,7 @@ const printInvoice = (req, res) => {
 
     try {
         dbConnection.query(bookOrderQuery, (error, result) => {
+            console.log(error, result);
             if (result.length > 0) {
                 pdf.Cell(36, 10, 'OrderNumber : ', 0, 0);
                 pdf.Cell(100, 10, result[0]?.orderNumber, 0, 0);

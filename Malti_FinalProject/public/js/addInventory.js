@@ -47,7 +47,7 @@ $(document).ready(() => {
             selectedBookArray = selectedBookArray.map(selectedBooks => {
                 if (selectedBooks.bookId == selectedBookId) {
                     selectedBooks.quantity += selectedQuantity;
-                    selectedBooks.rowTotal = selectedBooks.quantity * selectedBooks.price;
+                    selectedBooks.rowTotal = Number(selectedBooks.quantity * selectedBooks.price).toFixed(2);
                 }
                 return selectedBooks;
             });
@@ -58,7 +58,7 @@ $(document).ready(() => {
                 quantity: selectedQuantity,
                 book: selectedBook,
                 price: selectedBookID[0].price,
-                rowTotal: selectedQuantity * selectedBookID[0].price
+                rowTotal: Number((selectedQuantity * selectedBookID[0].price).toFixed(2))
             })
         }
 
@@ -74,6 +74,7 @@ $(document).ready(() => {
         })
 
         let totalAmount = selectedBookArray.map(b => b.rowTotal).reduce((a, c) => { return a + c });
+        totalAmount = Number(totalAmount.toFixed(2));
         selectedBookDetails = { totalItems, selectedBookArray, totalAmount }
 
         $('#selectedBookDetailsFooter').empty();

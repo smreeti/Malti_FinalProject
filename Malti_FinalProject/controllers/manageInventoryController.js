@@ -7,6 +7,7 @@ const manageInventory = (req, res) => {
 
     try {
         dbConnection.query(bookOrderQuery, async (error, result) => {
+            console.log(error, result);
             res.render('manageInventory', { result });
         });
     } catch (error) {
@@ -34,6 +35,8 @@ const manageOrderItem = (req, res) => {
                                 JOIN book b ON b.bookID = oi.bookID
                                 JOIN orderstatus os ON os.orderStatusID = oi.orderStatusID
                                 WHERE oi.bookOrderID = ${bookOrderID}`;
+
+                    console.log(error, bookOrder);
 
                     if (bookOrder) {
                         dbConnection.query(bookOrderItemQuery, async (error, orderItems) => {
@@ -66,6 +69,7 @@ const verifyOrder = (req, res) => {
                                     WHERE orderItemID =${orderItem.orderItemID}`;
         try {
             dbConnection.query(updateOrderItemQuery, async (error, orderItems) => {
+                console.log(error, orderItems);
                 let selectBookStockQuery = `SELECT * FROM bookStock WHERE bookID = ${orderItem.bookID}`;
 
                 //if the book already exists, simply update the quantity count else insert new record of Book Stock with corresponding book and quantity.
