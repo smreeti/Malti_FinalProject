@@ -260,6 +260,60 @@ select {
   -webkit-appearance: textfield;
 }
 
+.books {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 2rem;
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .books { width: 100%; grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 767px) {
+  .books { width: 100%; grid-template-columns: 1fr; }
+}
+
+.book-item {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.book-item:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.book-item img {
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+.book-item .info {
+  padding: 2px 16px;
+}
+
+.book-item-author {
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.book-item-category {
+  font-size: 14px;
+  color: #606060;
+  font-weight: 300;
+}
+
+.book-item-footer {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
 
 .list-unstyled {
   padding-left: 0;

@@ -84,4 +84,58 @@ const fetchBookStocks = (req, res) => {
     }
 }
 
-module.exports = { reports, fetchBookStocks }
+const fetchBookList = (req, res) => {
+  const pdf = new PDF("P", "mm", "A4");
+
+  pdf.AddPage();
+  pdf.AliasNbPages();
+  pdf.SetFont("Arial", "B", 9);
+  pdf.Cell(180, 10, "Book List Report", 0, 0, "C");
+  pdf.Ln(10);
+
+  let bookListQuery = `SELECT b.name as bookName, a.firstName as authorFName, a.lastName as authorLName, bc.categoryName, b.price, b.ISBN 
+                        FROM book AS b 
+                        JOIN author AS a ON b.authorId = a.authorId 
+                        JOIN bookcategory AS bc ON b.bookCategoryID = bc.bookCategoryId`;
+
+  try {
+    dbConnection.query(bookListQuery, (error, bookListResult) => {
+      console.log(error, bookListResult);
+      if (bookListResult.length > 0) {
+        pdf.Cell(60, 10, "Book", 1, 0, "C");
+        pdf.Cell(40, 10, "Author", 1, 0, "C");
+        pdf.Cell(40, 10, "Category", 1, 0, "C");
+        pdf.Cell(20, 10, "Price", 1, 0, "C");
+        pdf.Cell(30, 10, "ISBN", 1, 0, "C");
+        pdf.Ln(10);
+
+        bookListResult.forEach((bookInfo, index) => {
+          pdf.Cell(60, 10, bookInfo.bookName, 1, 0, "C");
+          pdf.Cell(
+            40,
+            10,
+            bookInfo.authorFName + " " + bookInfo.authorLName,
+            1,
+            0,
+            "C"
+          );
+          pdf.Cell(40, 10, bookInfo.categoryName, 1, 0, "C");
+          pdf.Cell(20, 10, "C$ " + bookInfo.price, 1, 0, "C");
+          pdf.Cell(30, 10, bookInfo.ISBN, 1, 0, "C");
+          pdf.Ln(10);
+        });
+
+        pdf.Ln(5);
+
+        pdf.Output("P", `booklist.pdf`);
+        res.redirect("/");
+      } else {
+        res.redirect("/");
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { reports, fetchBookStocks, fetchBookList };

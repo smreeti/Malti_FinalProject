@@ -16,7 +16,8 @@ const {
     logout,
     printInvoice,
     reports,
-    fetchBookStocks
+    fetchBookStocks,
+    fetchBookList,
 } = require('../controllers/controllers.js');
 const redirectIfAuthenticatedMiddleware = require('../middlewares/redirectIfAuthenticatedMiddleware.js');
 
@@ -41,4 +42,5 @@ router.post('/verifyOrder', redirectIfAuthenticatedMiddleware, verifyOrder);
 router.get('/printInvoice/:bookOrderID', printInvoice);
 router.get('/reports', reports);
 router.get('/fetchBookStocks', fetchBookStocks);
+router.get('/fetchBookList', fetchBookList);
 module.exports = router;
