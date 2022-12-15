@@ -11667,7 +11667,6 @@ header.masthead .post-heading .meta a {
 
 #notFoundBanner {
   background-image: url('/images/notfound.jpg');
-
 }
 
 #addInventory {
@@ -11677,6 +11676,11 @@ header.masthead .post-heading .meta a {
 #manageBookBanner {
   background-image: url('/images/manageBook.jpg');
 }
+
+#reportsBanner {
+  background-image: url('/images/analysis.jpg');
+}
+
 
 .masthead {
   height: 95vh;
@@ -11870,4 +11874,8 @@ td {
 .orderSuccess a {
   color: blue;
   text-decoration: underline;
+}
+
+.reports{
+  text-align: center;
 }

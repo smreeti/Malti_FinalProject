@@ -4,7 +4,8 @@ const { addInventory, addOrder, confirmOrder } = require('./addInventoryControll
 const { manageInventory, manageOrderItem, verifyOrder } = require('./manageInventoryController.js');
 const { signUp, signUpUser } = require('./signupController.js');
 const { logout } = require('./logoutController.js');
-const {printInvoice} = require('./pdfController.js');
+const { printInvoice } = require('./invoiceController.js');
+const { reports, fetchBookStocks } = require('./reportsController.js');
 
 module.exports = {
     dashboard,
@@ -19,5 +20,7 @@ module.exports = {
     signUp,
     signUpUser,
     logout,
-    printInvoice
+    printInvoice,
+    reports,
+    fetchBookStocks
 }
