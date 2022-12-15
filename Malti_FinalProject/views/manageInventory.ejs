@@ -36,7 +36,7 @@
                                 <th>Order Status</th>
                                 <th>Total Amount</th>
                                 <th></th>
-                                
+
                             </tr>
                         </thead>
 
@@ -61,14 +61,17 @@
                                     <td>
                                         <%= result[i].totalAmount %>
                                     </td>
-                                    <td class="seeDetails"> <a href="/manageOrderItem/<%= result[i].bookOrderID %>"> View Details</a></td>
+                                    <td class="seeDetails"> <a href="/manageOrderItem/<%= result[i].bookOrderID %>">
+                                            View Details</a></td>
                                 </tr>
                                 <% } %>
 
                         </tbody>
                     </table>
                     <%}else{ %>
-                        <p> No book orders yet!</p>
+                        <div class="no_orders">
+                            <p> No book orders yet!</p>
+                        </div>
                         <%} %>
             </main>
 
