@@ -5,7 +5,7 @@ $(document).ready(() => {
         let { books } = data;
         $('#book').empty();
 
-        let filteredBooks = books.filter(book =>  (book.bookCategoryID == selectedBookCategory));
+        let filteredBooks = books.filter(book => (book.bookCategoryID == selectedBookCategory));
 
         filteredBooks.forEach(book => {
             $('#book').append($('<option>', {
@@ -18,6 +18,7 @@ $(document).ready(() => {
 
     fetchBook();
 
+    //filter books based on the book category
     $('#bookCategory').change(() => {
         fetchBook();
     })
@@ -25,11 +26,16 @@ $(document).ready(() => {
     let selectedBookArray = []; //for selected book lists and used during confirmation
     let totalItems = 0;
     let selectedBookDetails;
+
     $("#addBookOrder").click(() => {
         let selectedBook = $('#book').val();
         let selectedBookId = $('#book :selected').attr("id");
         let selectedQuantity = parseInt($('#quantity').val());
+        let data = JSON.parse($('#data').val());
+        let { books } = data;
+
         totalItems += (selectedQuantity);
+        let selectedBookID = books.filter(book => book.bookID == Number(selectedBookId));
 
         //show table for selected books
         $('#selectedBooks').css("display", "block");
@@ -41,6 +47,7 @@ $(document).ready(() => {
             selectedBookArray = selectedBookArray.map(selectedBooks => {
                 if (selectedBooks.bookId == selectedBookId) {
                     selectedBooks.quantity += selectedQuantity;
+                    selectedBooks.rowTotal = selectedBooks.quantity * selectedBooks.price;
                 }
                 return selectedBooks;
             });
@@ -49,7 +56,9 @@ $(document).ready(() => {
             selectedBookArray.push({
                 bookId: selectedBookId,
                 quantity: selectedQuantity,
-                book: selectedBook
+                book: selectedBook,
+                price: selectedBookID[0].price,
+                rowTotal: selectedQuantity * selectedBookID[0].price
             })
         }
 
@@ -59,17 +68,24 @@ $(document).ready(() => {
                             <td class ="rowIndex">${index + 1}</td>
                             <td>${selectedBooks.book}</td>
                             <td>${selectedBooks.quantity}</td>
+                            <td>${selectedBooks.price}</td>
+                            <td>${selectedBooks.rowTotal}</td>
                         </tr>`);
-
         })
 
-        selectedBookDetails = { totalItems, selectedBookArray }
+        let totalAmount = selectedBookArray.map(b => b.rowTotal).reduce((a, c) => { return a + c });
+        selectedBookDetails = { totalItems, selectedBookArray, totalAmount }
 
         $('#selectedBookDetailsFooter').empty();
         $('#selectedBookDetailsFooter').append(
             `<tr>
-                <td colspan="3">
+                <td colspan="5">
                   <b> Total Items : ${totalItems}  <b>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                <b> Total Amount : ${totalAmount}  <b>
                 </td>
             </tr>`
         )

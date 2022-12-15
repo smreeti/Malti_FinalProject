@@ -1,7 +1,7 @@
 let { dbConnection } = require('../database/dbConfig.js');
 
 const manageInventory = (req, res) => {
-    let bookOrderQuery = `SELECT bookOrderID, orderNumber, quantity, orderedDate, os.code as orderStatus
+    let bookOrderQuery = `SELECT bookOrderID, orderNumber, quantity, orderedDate, os.code as orderStatus, totalAmount
                          FROM bookorder b
                          JOIN orderstatus os ON b.orderStatusID = os.orderStatusID`;
 
@@ -16,7 +16,7 @@ const manageInventory = (req, res) => {
 
 const manageOrderItem = (req, res) => {
     let bookOrderID = req.params.bookOrderID;
-    let bookOrderQuery = `SELECT bookOrderID, orderNumber, quantity, orderedDate, b.orderStatusID,
+    let bookOrderQuery = `SELECT bookOrderID, orderNumber, quantity, orderedDate, b.orderStatusID, totalAmount,
                         CONCAT(firstName, ' ', lastName)as employee 
                         FROM bookorder b
                         JOIN orderstatus os ON b.orderStatusID = os.orderStatusID
@@ -38,6 +38,7 @@ const manageOrderItem = (req, res) => {
                     if (bookOrder) {
                         dbConnection.query(bookOrderItemQuery, async (error, orderItems) => {
                             let bookOrderDetails = { bookOrder: bookOrder[0], orderItems };
+                            console.log(bookOrderDetails)
                             res.render('manageOrderDetails', { bookOrderDetails, orderStatus });
                         })
                     } else {
