@@ -32,6 +32,7 @@ app.use(expressSession({
 app.use("*", (req, res, next) => {
     userId = req.session.userId;
     isLoggedIn = req.session.isLoggedIn;
+    loggedInEmployee = req.session.loggedInEmployee;
     next();
 })
 

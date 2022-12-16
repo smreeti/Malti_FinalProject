@@ -20,6 +20,7 @@ const loginEmployee = (req, res) => {
             if (same) { //if passwords match
                 req.session.loggedInId = employee[0].employeeID;
                 req.session.isLoggedIn = true;
+                req.session.loggedInEmployee = employee[0].firstName;
                 return res.redirect('/');
             }
         }
