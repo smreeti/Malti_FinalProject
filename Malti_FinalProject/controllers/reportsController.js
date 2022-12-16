@@ -16,12 +16,12 @@ class PDF extends FPDF {
     // Logo
     this.Image(path.join(__dirname, '..', 'public', 'images', 'books-banner.jpg'), 90, 5, 20, 0, 'JPG');
     this.Ln(10);
-    this.SetFont('Arial', 'B', 13);
+    this.SetFont('Arial', 'B', 15);
 
     // Header Title
     this.Cell(180, 10, 'Malti Book Store', 0, 0, 'C');
     this.Ln(5);
-    this.SetFont('Arial', 'B', 8);
+    this.SetFont('Arial', 'B', 9);
     this.Cell(180, 10, 'Waterloo, Canada', 0, 0, 'C');
 
     // Line break
@@ -44,9 +44,9 @@ const fetchBookStocks = (req, res) => {
 
   pdf.AddPage();
   pdf.AliasNbPages();
-  pdf.SetFont('Arial', 'B', 12);
+  pdf.SetFont('Arial', 'B', 13);
   pdf.Cell(180, 10, 'Available Book Stock Report', 0, 0, 'C');
-  pdf.SetFont('Arial', '', 12);
+  pdf.SetFont('Arial', 'B', 12);
   pdf.Ln(10);
 
   let bookStocksQuery = `SELECT b.name, bc.categoryName, b.price, bs.quantity
@@ -66,6 +66,7 @@ const fetchBookStocks = (req, res) => {
         pdf.Cell(24, 10, 'Quantity', 1, 0, 'C');
         pdf.Ln(10);
 
+        pdf.SetFont('Arial', '', 12);
         bookStockResult.forEach((bookInfo, index) => {
           pdf.Cell(10, 10, index + 1, 1, 0, 'C');
           pdf.Cell(75, 10, bookInfo.name, 1, 0, 'C');
@@ -97,9 +98,10 @@ const fetchBookList = (req, res) => {
 
   pdf.AddPage();
   pdf.AliasNbPages();
-  pdf.SetFont("Arial", "B", 9);
+  pdf.SetFont("Arial", "B", 12);
   pdf.Cell(180, 10, "Book List Report", 0, 0, "C");
   pdf.Ln(10);
+  pdf.SetFont("Arial", "B", 10);
 
   let bookListQuery = `SELECT b.name as bookName, CONCAT(a.firstName, ' ', a.lastName) as authorName, bc.categoryName, b.price, b.ISBN FROM book AS b
                         JOIN author AS a
@@ -118,6 +120,7 @@ const fetchBookList = (req, res) => {
         pdf.Cell(30, 10, "ISBN", 1, 0, "C");
         pdf.Ln(10);
 
+        pdf.SetFont('Arial', 'B', 8);
         bookListResult.forEach((bookInfo, index) => {
           pdf.Cell(60, 10, bookInfo.bookName, 1, 0, "C");
           pdf.Cell(
@@ -129,7 +132,7 @@ const fetchBookList = (req, res) => {
             "C"
           );
           pdf.Cell(40, 10, bookInfo.categoryName, 1, 0, "C");
-          pdf.Cell(20, 10, "C$ " + bookInfo.price, 1, 0, "C");
+          pdf.Cell(20, 10, "$ " + bookInfo.price, 1, 0, "C");
           pdf.Cell(30, 10, bookInfo.ISBN, 1, 0, "C");
           pdf.Ln(10);
         });
