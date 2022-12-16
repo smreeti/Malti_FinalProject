@@ -95,7 +95,7 @@ const printInvoice = (req, res) => {
                             pdf.Cell(90, 10, orderItem.name, 1, 0, 'C');
                             pdf.Cell(20, 10, orderItem.quantity, 1, 0, 'C');
                             pdf.Cell(20, 10, '$ ' + orderItem.price, 1, 0, 'C');
-                            pdf.Cell(30, 10, '$ ' + orderItem.subtotal, 1, 0, 'C');
+                            pdf.Cell(30, 10, '$ ' + (orderItem.subtotal).toFixed(2), 1, 0, 'C');
                             pdf.Ln(10);
                         })
                         

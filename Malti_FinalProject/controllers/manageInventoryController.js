@@ -5,10 +5,18 @@
 let { dbConnection } = require('../database/dbConfig.js');
 
 const manageInventory = (req, res) => {
-    let bookOrderQuery = `SELECT bookOrderID, orderNumber, quantity, orderedDate, os.code as orderStatus, totalAmount
-                         FROM bookorder b
-                         JOIN orderstatus os ON b.orderStatusID = os.orderStatusID`;
+    let orderStatus = req.query.orderStatus;
+    console.log("otfet0",orderStatus)
 
+    let bookOrderQuery = `SELECT bookOrderID, orderNumber, quantity, orderedDate, os.code as orderStatus, totalAmount FROM bookorder b JOIN orderstatus os ON b.orderStatusID = os.orderStatusID`;
+
+    console.log(orderStatus)
+
+    if (orderStatus) {
+        bookOrderQuery += ` WHERE os.code = '${orderStatus}'`;
+    }
+
+    console.log(bookOrderQuery)
     try {
         dbConnection.query(bookOrderQuery, async (error, result) => {
             console.log(error, result);

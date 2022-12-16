@@ -27,9 +27,17 @@
             </header>
 
             <main>
+                <h1 class="title">Available Book Orders</h1>
+
+                <div class="results_categories">
+                    <a href="/manageInventory">All</a>
+                    <a href="/manageInventory?orderStatus=PENDING">PENDING</a>
+                    <a href="/manageInventory?orderStatus=RECEIVED">RECEIVED</a>
+                    <a href="/manageInventory?orderStatus=CANCELLED">CANCELLED</a>
+
+                </div>
 
                 <% if(result !=null && result.length>0) { %>
-                    <h1 class="title">Available Book Orders</h1>
                     <table class="selectedBookTable">
                         <thead>
                             <tr>

@@ -271,16 +271,25 @@ select {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  .books { width: 100%; grid-template-columns: repeat(2, 1fr); }
+  .books {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 767px) {
-  .books { width: 100%; grid-template-columns: 1fr; }
-  .orderSuccess a {margin-right: 0;}
+  .books {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .orderSuccess a {
+    margin-right: 0;
+  }
 }
 
 .book-item {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 100%;
   border-radius: 12px;
@@ -288,7 +297,7 @@ select {
 }
 
 .book-item:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .book-item img {
@@ -312,12 +321,12 @@ select {
 }
 
 .book-item-price {
-  color:#198754;
+  color: #198754;
 }
 
 .book-item-quantity {
   font-weight: 300;
-  color:#198754;
+  color: #198754;
 }
 
 .book-item-footer {
@@ -11933,7 +11942,7 @@ td {
 }
 
 .orderSuccess {
-  color:#198754 !important;
+  color: #198754 !important;
   text-align: center;
 }
 
@@ -11945,7 +11954,7 @@ td {
 
 
 .orderSuccess a {
-  background-color:#006479;
+  background-color: #006479;
   color: #fff;
   font-weight: 500;
   text-decoration: none;
@@ -11957,33 +11966,52 @@ td {
   margin-right: 32px;
 }
 
-.reports{
+.reports {
   text-align: center;
+  font-size: 24px;
 }
 
-.no_orders{
+.no_orders {
   text-align: center;
   background-color: red;
   height: 40px;
 }
 
-.no_orders{
+.no_orders {
   font-size: 20px;
 }
 
-.fonts_container{
+.fonts_container {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
 }
 
-.fonts_container button{
+.fonts_container button {
   width: 45px;
 }
 
-.font{
+.font {
   margin-bottom: 0;
   font-size: 24px;
   font-weight: bold;
+}
+
+.results_categories {
+  width: max-content;
+  margin: 0 auto 32px;
+}
+
+.results_categories a {
+  width: 400px !important;
+  border-radius: 4px;
+  padding: 8px 18px;
+  background-color: #007189;
+  color: #fff;
+  margin-right: 16px;
+}
+
+.results_categories a:hover {
+  background-color: #04aa6d;
 }

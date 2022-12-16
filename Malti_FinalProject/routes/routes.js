@@ -39,6 +39,7 @@ router.get('/addInventory', redirectIfAuthenticatedMiddleware, addInventory);
 router.post('/addOrder', redirectIfAuthenticatedMiddleware, addOrder);
 router.post('/confirmOrder', redirectIfAuthenticatedMiddleware, confirmOrder);
 
+router.get('/manageInventory/:orderStatus', redirectIfAuthenticatedMiddleware, manageInventory);
 router.get('/manageInventory', redirectIfAuthenticatedMiddleware, manageInventory);
 router.get('/manageOrderItem/:bookOrderID', redirectIfAuthenticatedMiddleware, manageOrderItem);
 router.post('/verifyOrder', redirectIfAuthenticatedMiddleware, verifyOrder);
