@@ -13,10 +13,13 @@ class PDF extends FPDF {
         // Logo
         this.Image(path.join(__dirname, '..', 'public', 'images', 'books-banner.jpg'), 90, 5, 20, 0, 'JPG');
         this.Ln(10);
-        this.SetFont('Arial', 'B', 13);
+        this.SetFont('Arial', 'B', 15);
 
         // Header Title
         this.Cell(180, 10, 'Malti Book Store', 0, 0, 'C');
+        this.Ln(5);
+        this.SetFont('Arial', 'B', 9);
+        this.Cell(180, 10, 'Waterloo, Canada', 0, 0, 'C');
 
         // Line break
         this.Ln(20);
@@ -90,6 +93,8 @@ const printInvoice = (req, res) => {
                 try {
                     dbConnection.query(bookOrderItemQuery, (error, bookOrderItems) => {
                         console.log(error);
+                        pdf.SetFont('Arial', '', 12);
+
                         bookOrderItems.forEach((orderItem, index) => {
                             pdf.Cell(20, 10, index + 1, 1, 0, 'C');
                             pdf.Cell(90, 10, orderItem.name, 1, 0, 'C');
@@ -98,8 +103,10 @@ const printInvoice = (req, res) => {
                             pdf.Cell(30, 10, '$ ' + (orderItem.subtotal).toFixed(2), 1, 0, 'C');
                             pdf.Ln(10);
                         })
-                        
+
                         pdf.Ln(5);
+
+                        pdf.SetFont('Arial', 'B', 12);
 
                         pdf.Cell(20, 10, 'Total : ', 0, 0);
                         pdf.Cell(100, 10, '$' + result[0]?.totalAmount, 0, 0);
