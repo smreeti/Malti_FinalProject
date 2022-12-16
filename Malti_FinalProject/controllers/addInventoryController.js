@@ -49,7 +49,7 @@ const confirmOrder = (req, res) => {
                 dbConnection.query(insertOrderItemQuery, (error, result) => {
                     console.log(error, result);
 
-                    res.render('orderConfirmation', { bookOrderID: `${lastInsertID}` });
+                    res.render('orderConfirmation', { bookOrderID: `${lastInsertID}`, orderNumber: `${randomNumber}` });
                 });
             })
         });
