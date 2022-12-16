@@ -1,3 +1,7 @@
+/*
+    Smriti Mool (8811566)
+    Malena Aguiar ((8793442)
+*/
 const mysql = require('mysql');
 
 const dbConfig = {

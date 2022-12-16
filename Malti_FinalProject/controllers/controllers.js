@@ -1,3 +1,7 @@
+/*
+    Smriti Mool (8811566)
+    Malena Aguiar ((8793442)
+*/
 const { dashboard } = require('./dashboardController.js');
 const { login, loginEmployee } = require('./loginController.js');
 const { addInventory, addOrder, confirmOrder } = require('./addInventoryController.js');

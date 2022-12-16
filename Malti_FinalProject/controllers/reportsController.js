@@ -1,3 +1,7 @@
+/*
+    Smriti Mool (8811566)
+    Malena Aguiar ((8793442)
+*/
 const FPDF = require('node-fpdf')
 let { dbConnection } = require('../database/dbConfig.js');
 const path = require('path');

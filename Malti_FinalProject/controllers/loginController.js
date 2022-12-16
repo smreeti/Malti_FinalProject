@@ -1,3 +1,7 @@
+/*
+    Smriti Mool (8811566)
+    Malena Aguiar ((8793442)
+*/
 let { dbConnection } = require('../database/dbConfig.js');
 const bcrypt = require('bcrypt');
 const mysql = require('mysql');
