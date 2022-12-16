@@ -27,14 +27,16 @@
 
             <main class="orderSuccess">
                 <p><b>Congratulations! You have successfully placed book order.</b></p>
-                <p>Your order number is : <b>
-                        <%=orderNumber%>
-                    </b>
-                </p>
-                <div class="orderSuccess-actions">
-                    <a href="/printInvoice/<%= bookOrderID %>">Print Invoice</a>
-                    <a href="/addInventory">Keep Ordering</a>
-                </div>
+                <% if(orderNumber){%>
+                    <p>Your order number is : <b>
+                            <%=orderNumber%>
+                        </b>
+                    </p>
+                    <%}%>
+                        <div class="orderSuccess-actions">
+                            <a href="/printInvoice/<%= bookOrderID %>">Print Invoice</a>
+                            <a href="/addInventory">Keep Ordering</a>
+                        </div>
             </main>
 
             <!--Footer-->

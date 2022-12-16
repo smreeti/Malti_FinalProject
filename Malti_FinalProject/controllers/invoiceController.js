@@ -112,7 +112,7 @@ const printInvoice = (req, res) => {
                         pdf.Cell(100, 10, '$' + result[0]?.totalAmount, 0, 0);
 
                         pdf.Output('P', `invoice.pdf`);
-                        res.render('orderConfirmation', { bookOrderID });
+                        res.render('orderConfirmation', { bookOrderID, orderNumber: null });
 
                         // var data = fs.readFileSync('./public/test.pdf');
                         // res.contentType("application/pdf");
