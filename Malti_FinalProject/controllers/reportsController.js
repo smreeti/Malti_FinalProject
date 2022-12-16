@@ -52,18 +52,18 @@ const fetchBookStocks = (req, res) => {
             if (bookStockResult.length > 0) {
 
                 pdf.Cell(10, 10, 'S.N.', 1, 0, 'C');
-                pdf.Cell(60, 10, 'Book', 1, 0, 'C');
+                pdf.Cell(75, 10, 'Book', 1, 0, 'C');
                 pdf.Cell(60, 10, 'Book Category', 1, 0, 'C');
-                pdf.Cell(20, 10, 'Price', 1, 0, 'C');
-                pdf.Cell(30, 10, 'Quantity', 1, 0, 'C');
+                pdf.Cell(19, 10, 'Price', 1, 0, 'C');
+                pdf.Cell(24, 10, 'Quantity', 1, 0, 'C');
                 pdf.Ln(10);
 
                 bookStockResult.forEach((bookInfo, index) => {
                     pdf.Cell(10, 10, index + 1, 1, 0, 'C');
-                    pdf.Cell(60, 10, bookInfo.name, 1, 0, 'C');
+                    pdf.Cell(75, 10, bookInfo.name, 1, 0, 'C');
                     pdf.Cell(60, 10, bookInfo.categoryName, 1, 0, 'C');
-                    pdf.Cell(20, 10, '$ ' + bookInfo.price, 1, 0, 'C');
-                    pdf.Cell(30, 10, bookInfo.quantity, 1, 0, 'C');
+                    pdf.Cell(19, 10, '$ ' + bookInfo.price, 1, 0, 'C');
+                    pdf.Cell(24, 10, bookInfo.quantity, 1, 0, 'C');
                     pdf.Ln(10);
                 })
 

@@ -31,6 +31,12 @@ $(document).ready(() => {
         let selectedBook = $('#book').val();
         let selectedBookId = $('#book :selected').attr("id");
         let selectedQuantity = parseInt($('#quantity').val());
+
+        if(!selectedQuantity || selectedQuantity < 1) {
+            alert('Please enter valid details.');
+            return;
+        }
+
         let data = JSON.parse($('#data').val());
         let { books } = data;
 
