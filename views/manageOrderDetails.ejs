@@ -1,0 +1,132 @@
+<!--
+    Smriti Mool (8811566)
+    Malena Aguiar ((8793442)
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HTML Header-->
+<%- include('layouts/header') -%>
+
+    <body>
+        <!-- Navigation -->
+        <%- include('layouts/navbar') -%>
+
+            <!-- Page Header-->
+            <header class="masthead" id="manageBookBanner">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <% if(bookOrderDetails.orderItems !=null && bookOrderDetails.orderItems.length>0) { %>
+                    <form class="form" name="manageBookOrderForm" id="manageBookOrderForm" action="/verifyOrder"
+                        method="POST">
+                        <input type="hidden" id="bookOrderDetails" name="bookOrderDetails"
+                            value="<%= JSON.stringify(bookOrderDetails) %>">
+
+                        <h1 class="title"> Book Order Details</h1>
+                        <div class="bookOrder">
+                            <p> <b>Order Number :</b>
+                                <%= bookOrderDetails.bookOrder.orderNumber %>
+                            </p>
+                            <p> <b>Ordered Date :</b>
+                                <%= bookOrderDetails.bookOrder.orderedDate.toISOString().split('T')[0] %>
+                            </p>
+                            <p> <b>Issued By :</b>
+                                <%= bookOrderDetails.bookOrder?.employee %>
+                            </p>
+
+                            <p> <b>Total Items : </b>
+                                <%= bookOrderDetails.bookOrder.quantity %>
+                            </p>
+                            <p> <b>Total Amount : </b>
+                                <%= bookOrderDetails.bookOrder.totalAmount %>
+                            </p>
+
+                            <label for="bookOrderStatus"><b>Book Order Status</b></label>
+                            <span class="required">*</span>
+                            <select name="bookOrderStatus" class="bookOrderStatusSelect">
+
+                                <% for(let k=0; k< orderStatus.length; k ++){ %>
+                                    <option value="<%= orderStatus[k].orderStatusID %>" <%
+                                        if(orderStatus[k].orderStatusID==bookOrderDetails.bookOrder.orderStatusID){%>
+                                        selected
+                                        <%} %>
+                                            >
+                                            <%= orderStatus[k].code %>
+                                    </option>
+
+                                    <% } %>
+                            </select>
+
+                        </div>
+
+                        <table class="selectedBookTable">
+                            <thead>
+                                <tr>
+                                    <th>S.N.</th>
+                                    <th>Book</th>
+                                    <th>Quantity</th>
+                                    <th>Confirm Order Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% for(let i=0; i< bookOrderDetails.orderItems.length; i ++){ %>
+
+                                    <tr>
+                                        <td>
+                                            <%= i+1 %>
+                                        </td>
+                                        <td>
+                                            <%= bookOrderDetails.orderItems[i].name %>
+                                        </td>
+                                        <td>
+                                            <%= bookOrderDetails.orderItems[i].quantity %>
+                                        </td>
+                                        <td>
+                                            <% for(let j=0; j< orderStatus.length; j ++){ %>
+                                                <input type="radio" id="<%=orderStatus[j].code%>" class="orderStatus"
+                                                    name="orderStatus/<%=i%>"
+                                                    <%if(orderStatus[j].orderStatusID==bookOrderDetails.orderItems[i].orderStatusID){%>
+                                                checked ="checked"
+                                                <%} %>
+                                                    state= "<%=bookOrderDetails.orderItems[i].orderItemID%>|
+                                                        <%=orderStatus[j].orderStatusID%>|<%=orderStatus[j].code%>">
+                                                                <label for="orderStatus" class="orderStatusLabel">
+                                                                    <%= orderStatus[j].code%>
+                                                                </label>
+                                                                <% } %>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                        </table>
+
+                        <% if(bookOrderDetails.bookOrder.orderStatusID==1 ){ %>
+                            <div class="button_container">
+                                <button type="submit">Confirm Order</button>
+                            </div>
+                            <% } %>
+                    </form>
+                    <%}else{ %>
+                        <p> No book orders yet!</p>
+                        <%} %>
+            </main>
+
+            <!--Footer-->
+            <%- include('layouts/footer') -%>
+                <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+                    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+                <script src="/js/verifyOrder.js"></script>
+    </body>
+
+</html>

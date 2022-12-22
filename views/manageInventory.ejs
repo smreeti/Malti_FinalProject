@@ -1,0 +1,94 @@
+<!--
+    Smriti Mool (8811566)
+    Malena Aguiar ((8793442)
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HTML Header-->
+<%- include('layouts/header') -%>
+
+    <body>
+        <!-- Navigation -->
+        <%- include('layouts/navbar') -%>
+
+            <!-- Page Header-->
+            <header class="masthead" id="manageBookBanner">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <!-- <h1>dcs</h1>
+                                <span class="subheading"></span> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <h1 class="title">Available Book Orders</h1>
+
+                <div class="results_categories">
+                    <a href="/manageInventory">All</a>
+                    <a href="/manageInventory?orderStatus=PENDING">PENDING</a>
+                    <a href="/manageInventory?orderStatus=RECEIVED">RECEIVED</a>
+                    <a href="/manageInventory?orderStatus=CANCELLED">CANCELLED</a>
+
+                </div>
+
+                <% if(result !=null && result.length>0) { %>
+                    <table class="selectedBookTable">
+                        <thead>
+                            <tr>
+                                <th>S.N.</th>
+                                <th>Order Number</th>
+                                <th>Quantity</th>
+                                <th>Ordered Date</th>
+                                <th>Order Status</th>
+                                <th>Total Amount</th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% for(let i=0; i< result.length; i ++){ %>
+                                <tr>
+                                    <td>
+                                        <%= i+1 %>
+                                    </td>
+                                    <td>
+                                        <%= result[i].orderNumber %>
+                                    </td>
+                                    <td>
+                                        <%= result[i].quantity %>
+                                    </td>
+                                    <td>
+                                        <%= result[i].orderedDate.toISOString().split('T')[0] %>
+                                    </td>
+                                    <td>
+                                        <%= result[i].orderStatus %>
+                                    </td>
+                                    <td>
+                                        <%= result[i].totalAmount %>
+                                    </td>
+                                    <td class="seeDetails"> <a href="/manageOrderItem/<%= result[i].bookOrderID %>">
+                                            View Details</a></td>
+                                </tr>
+                                <% } %>
+
+                        </tbody>
+                    </table>
+                    <%}else{ %>
+                        <div class="no_orders">
+                            <p> No book orders yet!</p>
+                        </div>
+                        <%} %>
+            </main>
+
+            <!--Footer-->
+            <%- include('layouts/footer') -%>
+    </body>
+
+</html>

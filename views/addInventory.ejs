@@ -1,0 +1,112 @@
+<!--
+    Smriti Mool (8811566)
+    Malena Aguiar ((8793442)
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HTML Header-->
+<%- include('layouts/header') -%>
+
+    <body>
+        <!-- Navigation -->
+        <%- include('layouts/navbar') -%>
+
+            <!-- Page Header-->
+            <header class="masthead" id="addInventory">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <form class="form" name="addBookOrderForm" id="addBookOrderForm" action="/addOrder" method="POST">
+                    <input type="hidden" id="data" name="data" value="<%=JSON.stringify(data)%>">
+                    <div class="form_container">
+
+                        <% if(insertionError !=null && insertionError.length> 0){%>
+                            <ul class="list-group">
+                                <% for(let i=0; i< insertionError.length; i ++){ %>
+                                    <li class="list-group-item list-group-item-danger">
+                                        <%= insertionError[i] %>
+                                    </li>
+                                    <% } %>
+                            </ul>
+                            <%} %>
+
+                                <% if(data !=null){%>
+                                    <label for="bookCategory"><b>Book Category</b></label>
+                                    <span class="required">*</span>
+                                    <select name="bookCategory" id="bookCategory" name="bookCategory" required>
+                                        <% for(let k=0; k< data.bookCategory.length; k++){ %>
+                                            <option value="<%= data.bookCategory[k].bookCategoryId %>"
+                                                id="<%= data.bookCategory[k].bookCategoryId %>">
+                                                <%= data.bookCategory[k].categoryName %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                    <% } %>
+
+                                        <label for="book"><b>Book</b></label>
+                                        <span class="required">*</span>
+                                        <select name="book" id="book" name="book" required>
+                                            <% for(let l=0; l< data.books.length; l++){ %>
+                                                <option value="<%= data.books[l].bookID%>"
+                                                    id="<%= data.books[l].bookID %>">
+                                                    <%= data.books[l].name %>
+                                                </option>
+                                                <% } %>
+                                        </select>
+
+                                        <label for="quantity"><b>Quantity</b></label>
+                                        <span class="required">*</span>
+                                        <input type="number" placeholder="Enter quantity" id="quantity" name="quantity"
+                                            required>
+
+                                        <div class="button_container">
+                                            <button type="button" id="addBookOrder">Add</button>
+                                        </div>
+                    </div>
+                </form>
+
+                <form class="form" id="selectedBooks" name="selectedBooks" action="/confirmOrder" method="POST">
+                    <input type="hidden" id="bookOrderDetails" name="bookOrderDetails">
+
+                    <h1> Selected Books</h1>
+                    <table class="selectedBookTable">
+                        <thead>
+                            <tr>
+                                <th>S.N.</th>
+                                <th>Book</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Sub total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="selectedBookDetails">
+                        </tbody>
+
+                        <tfoot id="selectedBookDetailsFooter">
+                        </tfoot>
+                    </table>
+
+                    <div class="button_container">
+                        <button type="submit">Confirm</button>
+                    </div>
+                </form>
+            </main>
+
+            <!--Footer-->
+            <%- include('layouts/footer') -%>
+                <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+                    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+                <script src="js/addInventory.js"></script>
+    </body>
+
+</html>

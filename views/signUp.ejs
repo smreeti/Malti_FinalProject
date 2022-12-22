@@ -1,0 +1,67 @@
+<!--
+    Smriti Mool (8811566)
+    Malena Aguiar ((8793442)
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HTML Header-->
+<%- include('layouts/header') -%>
+
+    <body>
+        <!-- Navigation -->
+        <%- include('layouts/navbar') -%>
+
+            <!-- Page Header-->
+            <header class="masthead" id="signupBanner">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>SignUp</h1>
+                                <span class="subheading">Welcome to Sign Up Page</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <form class="form" action="/signUpUser" method="POST">
+                    <div class="form_container">
+                        <label for="firstName"><b>First Name</b></label>
+                        <span class="required">*</span>
+                        <input type="text" placeholder="Enter First Name" name="firstName" required>
+
+                        <label for="lastName"><b>Last Name</b></label>
+                        <span class="required">*</span>
+                        <input type="text" placeholder="Enter Last Name" name="lastName" required>
+
+                        <label for="lastName"><b>Email</b></label>
+                        <span class="required">*</span>
+                        <input type="text" placeholder="Enter Email" name="email" required>
+
+                        <label for="phonenumber"><b>Phone Number</b></label>
+                        <span class="required">*</span>
+                        <input type="number" placeholder="Enter Phone Number" name="phonenumber" required>
+
+                        <label for="username"><b>Username</b></label>
+                        <span class="required">*</span>
+                        <input type="text" placeholder="Enter Username" name="username" required>
+
+                        <label for="password"><b>Password</b></label>
+                        <span class="required">*</span>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+
+                        <div class="button_container">
+                            <button type="submit">Sign up</button>
+                        </div>
+                    </div>
+                </form>
+            </main>
+
+            <!--Footer-->
+            <%- include('layouts/footer') -%>
+    </body>
+
+</html>

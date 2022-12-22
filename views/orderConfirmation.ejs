@@ -1,0 +1,46 @@
+<!--
+    Smriti Mool (8811566)
+    Malena Aguiar ((8793442)
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HTML Header-->
+<%- include('layouts/header') -%>
+
+    <body>
+        <!-- Navigation -->
+        <%- include('layouts/navbar') -%>
+
+            <!-- Page Header-->
+            <header class="masthead" id="addInventory">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="orderSuccess">
+                <p><b>Congratulations! You have successfully placed book order.</b></p>
+                <% if(orderNumber){%>
+                    <p>Your order number is : <b>
+                            <%=orderNumber%>
+                        </b>
+                    </p>
+                    <%}%>
+                        <div class="orderSuccess-actions">
+                            <a href="/printInvoice/<%= bookOrderID %>">Print Invoice</a>
+                            <a href="/addInventory">Keep Ordering</a>
+                        </div>
+            </main>
+
+            <!--Footer-->
+            <%- include('layouts/footer') -%>
+    </body>
+
+</html>
